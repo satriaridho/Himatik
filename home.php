@@ -173,9 +173,9 @@
         .then(data => {
             // Extract dates, sales, product names, and categories from the response
             const labels = data.map(item => item.sale_date);
-            const sales = data.map(item => item.sales);
-            const productNames = data.map(item => item.product_name);
-            const categories = data.map(item => item.category);
+            const sales = data.map(item => item.total_sales);
+            // const productNames = data.map(item => item.product_name);
+            // const categories = data.map(item => item.category);
 
             // Create the chart
             const ctx = document.getElementById('salesChart').getContext('2d');
@@ -207,12 +207,12 @@
                                     // Show sales, product name, and category in the tooltip
                                     const index = tooltipItem.dataIndex;
                                     const salesValue = sales[index];
-                                    const product = productNames[index];
-                                    const category = categories[index];
+                                    // const product = productNames[index];
+                                    // const category = categories[index];
                                     return [
                                         `Sales: ${salesValue}`,
-                                        `Product: ${product}`,
-                                        `Category: ${category}`
+                                        // `Product: ${product}`,
+                                        // `Category: ${category}`
                                     ];
                                 }
                             }
