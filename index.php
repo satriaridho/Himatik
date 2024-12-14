@@ -26,22 +26,22 @@
         <nav class="nav flex-column">
         <h1 style="color: #76453b; font-weight: bold; opacity: 0.7;">Dashboard Admin</h1>
         <br />
-        <a class="nav-link active" href="index.php?page=home">
+        <a class="nav-link " href="index.php?page=home">
             <i class="fas fa-tachometer-alt"></i> Dashboard
         </a>
         
-        <a class="nav-link" href="index.php?page=stok">
+        <a class="nav-link " href="index.php?page=stok">
             <i class="fas fa-box"></i> Manajemen Stok
         </a>
-        <a class="nav-link" href="#">
+        <a class="nav-link " href="#">
             <i class="fas fa-users"></i> Users
         </a>
         
-        <a class="nav-link" href="#">
+        <a class="nav-link " href="#">
             <i class="fas fa-bell"></i> Notifications
         </a>
         <div> 
-            <a class="nav-link" href="logout.html">
+            <a class="nav-link " href="logout.html">
                 <i class="fas fa-sign-out-alt"></i> Logout
             </a>
         </div>
