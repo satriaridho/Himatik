@@ -1,3 +1,7 @@
+<?php
+include 'session.php';
+requireLogin();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +44,7 @@
             <i class="fas fa-bell"></i> Notifications
         </a>
         <div> 
-            <a class="nav-link" href="logout.html">
+            <a class="nav-link" href="logout.php">
                 <i class="fas fa-sign-out-alt"></i> Logout
             </a>
         </div>

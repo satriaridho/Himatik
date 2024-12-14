@@ -21,9 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['role'] = isset($user['admin_id']) ? 'admin' : 'user';
 
                 if ($_SESSION['role'] === 'admin') {
-                    header("Location: admin_dashboard.php");
+                    header("Location: index.php");
                 } else {
-                    header("Location: user_dashboard.php");
+                    header("Location: index.php");
                 }
                 exit;
             }
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- admintest@gmail.com | admintest -->
 
-    <form method="post" action="index.php">
+    <form method="post" action="login.php">
       <div class="email">
         <p>EMAIL</p>
         <input type="email" name="email" placeholder="Email address">

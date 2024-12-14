@@ -168,7 +168,7 @@
 <script>
 
     // Fetch sales data from the PHP script
-    fetch('connection.php')
+    fetch('sales_chart_connection.php')
         .then(response => response.json())
         .then(data => {
             // Extract dates, sales, product names, and categories from the response
@@ -251,5 +251,52 @@
         },
     },
     });
+
+    // chart data stok
+google.charts.load('current', {'packages':['bar']});
+google.charts.setOnLoadCallback(drawChart);
+
+function drawChart() {
+    // Fetch data from stock_chart_connection.php
+    fetch('stock_chart_connection.php')
+        .then(response => response.json())
+        .then(data => {
+            // Add column headers to the data
+            data.unshift(['category', 'stock', 'sales']);
+
+            var chartData = google.visualization.arrayToDataTable(data);
+
+            var options = {
+                bars: 'horizontal', // Required for Material Bar Charts.
+                hAxis: { format: 'decimal' },
+                height: 200,  // Adjust the height of the entire chart
+                width: 850,   // Adjust the width of the entire chart
+                colors: ['#43766C', '#12372A'],
+                backgroundColor: '#DCD7C9',
+                chartArea: {
+                    backgroundColor: '#DCD7C9',
+                    left: 400,   // Optional: Space to the left of the chart
+                    right: 400,  // Optional: Space to the right of the chart
+                    top: 20,    // Optional: Space above the chart
+                    bottom: 40  // Optional: Space below the chart
+                },
+                barGroupWidth: 50, // Controls the gap between groups (i.e., the bars for 'Stok' and 'Terjual')
+                barSpacing: 30,    // Controls the spacing between the bars in each group
+            };
+
+            var chart = new google.charts.Bar(document.getElementById('chart_div'));
+            chart.draw(chartData, google.charts.Bar.convertOptions(options));
+
+            var btns = document.getElementById('btn-group');
+
+            btns.onclick = function (e) {
+                if (e.target.tagName === 'BUTTON') {
+                    options.hAxis.format = e.target.id === 'none' ? '' : e.target.id;
+                    chart.draw(chartData, google.charts.Bar.convertOptions(options));
+                }
+            }
+        })
+        .catch(error => console.error('Error fetching data:', error));
+}
 
 </script>

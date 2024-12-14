@@ -54,51 +54,6 @@ nextBtn.addEventListener('click', () => {
 
 updateCalendar();
 
-
-
-// chart data stok
-google.charts.load('current', {'packages':['bar']});
-google.charts.setOnLoadCallback(drawChart);
-
-function drawChart() {
-  var data = google.visualization.arrayToDataTable([
-    ['Tipe', 'Stok', 'Terjual'],
-    ['CA', 1000, 400],
-    ['IL', 1170, 460],
-    ['NY', 660, 1120]
-  ]);
-
-  var options = {
-    bars: 'horizontal', // Required for Material Bar Charts.
-    hAxis: { format: 'decimal' },
-    height: 200,  // Adjust the height of the entire chart
-    width: 850,   // Adjust the width of the entire chart
-    colors: ['#43766C', '#12372A'],
-    backgroundColor: '#DCD7C9',
-    chartArea: {
-      backgroundColor: '#DCD7C9',
-      left: 400,   // Optional: Space to the left of the chart
-      right: 400,  // Optional: Space to the right of the chart
-      top: 20,    // Optional: Space above the chart
-      bottom: 40  // Optional: Space below the chart
-    },
-    barGroupWidth: 50, // Controls the gap between groups (i.e., the bars for 'Stok' and 'Terjual')
-    barSpacing: 30,    // Controls the spacing between the bars in each group
-  };
-
-  var chart = new google.charts.Bar(document.getElementById('chart_div'));
-  chart.draw(data, google.charts.Bar.convertOptions(options));
-
-  var btns = document.getElementById('btn-group');
-
-  btns.onclick = function (e) {
-    if (e.target.tagName === 'BUTTON') {
-      options.hAxis.format = e.target.id === 'none' ? '' : e.target.id;
-      chart.draw(data, google.charts.Bar.convertOptions(options));
-    }
-  }
-}
-
 // Pilih semua link di sidebar
 const navLinks = document.querySelectorAll('.nav-link');
 
