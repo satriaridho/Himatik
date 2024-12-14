@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2024 at 12:34 PM
+-- Generation Time: Dec 14, 2024 at 01:10 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -31,8 +31,15 @@ CREATE TABLE `admin` (
   `admin_id` int(11) NOT NULL,
   `username` varchar(16) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `password` varchar(16) NOT NULL
+  `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`admin_id`, `username`, `email`, `password`) VALUES
+(1, 'AdminTest', 'admintest@gmail.com', '$2a$12$/rwsxksQpQmCR7i5VI75feu0roEz2PcI8l4vo6NYmUTf2b3xtZkZa');
 
 -- --------------------------------------------------------
 
@@ -54,7 +61,7 @@ CREATE TABLE `sales_data` (
 --
 
 INSERT INTO `sales_data` (`id`, `product_name`, `category`, `stock`, `sale_date`, `sales`) VALUES
-(1, 'ayam_goreng', 'Makanan', 12, '2024-12-14', 10),
+(1, 'Ayam Kadal', 'Makanan', 12, '2024-12-14', 10),
 (2, 'Es Gelas', 'Minuman', 59, '2024-12-14', 20),
 (3, 'Joko kendil', 'Alat Tulis', 80, '2024-12-13', 15);
 
@@ -101,7 +108,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `sales_data`
