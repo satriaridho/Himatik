@@ -1,0 +1,89 @@
+body{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #43766C;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.login-cont{
+  background: linear-gradient(to bottom, #B19470, #76453B);
+  border-radius: 15px;
+  padding: 20px;
+  width: 320px;
+  height: 540px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+.login-cont img{
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+  margin-top: 30px;
+  border-radius: 50%;
+}
+.login-cont h1{
+  font-size: 19px;
+  margin-bottom: 40px;
+  margin-top: -5px;
+  opacity: 0.6;
+}
+.login-cont h2{
+  font-size: 20px;
+  margin-bottom: -15px;
+  font-weight: bolder;
+}
+.login-cont h5{
+ font-size: 14px;
+ margin-bottom: 35px;
+ font-weight: 50;
+}
+.login-cont p{
+  font-size: 12px;
+  text-align: left;
+}
+
+.login-cont input[type="email"],
+.login-cont input[type="password"] {
+  width: 90%;
+  padding: 10px;
+  margin: -3px 0;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 5px black;
+}
+.login-cont input[type="submit"] {
+  width: 95%;
+  padding: 10px;
+  margin: 10px 0;
+  margin-top: 25px;
+  border: none;
+  border-radius: 5px;
+  background-color: #3751FF;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+.login-cont a {
+  color: #007BFF;
+  text-decoration: none;
+  font-size: 12px;
+}
+.login-cont a:hover {
+  text-decoration: underline;
+}
+
+.email{
+  margin-bottom: 30px;
+}
+.pass{
+  margin-bottom: 20px;
+}
+
+input::placeholder{
+  opacity: 0.4;
+}

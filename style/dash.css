@@ -1,0 +1,154 @@
+body {
+  background-color: #43766C;
+  font-family: Arial, sans-serif;
+}
+.sidebar {
+  background-color: #DCD7C9;
+  padding: 20px;
+  margin-right: 30px;
+}
+.sidebar .nav-link {
+  color: #8a7e6d;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.sidebar .nav-link.active {
+  color: #8a7e6d;
+  font-weight: bold;
+}
+.sidebar .nav-link i {
+  margin-right: 10px;
+}
+.content {
+  padding: 30px;
+}
+.card {
+  background-color: #DCD7C9;
+  color: #B19470;
+  border: none;
+  margin-bottom: 20px;
+}
+.card-header {
+  background-color: #DCD7C9;
+  border-bottom: none;
+  font-size: 18px;
+  font-weight: bold;
+}
+.card-body {
+  padding: 0;
+  margin: 10px;
+}
+.card-body p {
+  font-size: 24px;
+  margin: 0;
+}
+
+.user-list img {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+.user-list .user-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.user-list .user-item:last-child {
+  margin-bottom: 0;
+}
+
+.calendar {
+  margin-top: -152px;
+  width: 550px;
+  font-family: Arial, sans-serif;
+  border-radius: 5px;
+  color: #76453B;
+}
+
+.headr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  background-color: #DCD7C9;
+  border-radius: 5px 5px 0 0;
+}
+
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background-color: #DCD7C9;
+  padding: 2px;
+  color: #B19470;
+}
+
+.day {
+  text-align: center;
+  padding: 2px;
+}
+
+.dates {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  padding: 5px;
+  background: #DCD7C9;
+  border-radius: 0 0 5px 5px;
+  color: #B19470;
+}
+
+.date {
+  text-align: center;
+  padding: 7px;
+  cursor: pointer;
+}
+
+.date.active {
+  background-color: #ADBC9F;
+  color: white;
+  border-radius: 100%;
+}
+
+.date.inactive {
+  color: grey;
+}
+
+.next {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #76453B;
+}
+.prev {
+  background-color: transparent;
+  border: none;
+  color: #76453B;
+  cursor: pointer;
+}
+#monthYear{
+  font-size: 20px;
+  margin-top: 15px;
+}
+
+.act{
+  height: 320px;
+  width: 550px;
+}
+
+/* CSS untuk warna font aktif */
+.nav-link.active {
+  color: #76453B; /* Ganti dengan warna yang diinginkan */
+  font-weight: bolder; /* Opsional, agar lebih terlihat */
+}
+
+.nav-link {
+  color: #76453B; /* Ganti dengan warna normal */
+}
+
+.nav-link:hover {
+  color: #76453B; /* Ganti dengan warna saat hover */
+}
+
+
+
