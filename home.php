@@ -167,47 +167,98 @@
 <script src="./js/main.js"></script>
 <script>
 
-    // Sales Chart
-    function generateDates() {
-        let dates = [];
-        let currentDate = new Date();
-        for (let i = 6; i >= 0; i--) {
-            let date = new Date(currentDate);
-            date.setDate(currentDate.getDate() - i);
-            dates.push(date.toLocaleDateString());
-        }
-        return dates;
-    }
+    // // Sales Chart
+    // function generateDates() {
+    //     let dates = [];
+    //     let currentDate = new Date();
+    //     for (let i = 6; i >= 0; i--) {
+    //         let date = new Date(currentDate);
+    //         date.setDate(currentDate.getDate() - i);
+    //         dates.push(date.toLocaleDateString());
+    //     }
+    //     return dates;
+    // }
 
-    const labels = generateDates();
+    // const labels = generateDates();
 
-    const data = Array.from({ length: 7 }, () => Math.floor(Math.random() * (500 - 100 + 1)) + 100);
+    // const data = Array.from({ length: 7 }, () => Math.floor(Math.random() * (500 - 100 + 1)) + 100);
 
-    var ctx = document.getElementById('salesChart').getContext('2d');
-    var salesChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels, 
-            datasets: [
-                {
-                    label: 'Sales',
-                    data: data, 
-                    borderColor: '#4caf50',
-                    backgroundColor: 'rgba(76, 175, 80, 0.0)', 
-                    fill: true, 
-                    tension: 0.4, 
-                },
-            ],
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    max: 600,
-                },
-            },
-        },
-    });
+    // var ctx = document.getElementById('salesChart').getContext('2d');
+    // var salesChart = new Chart(ctx, {
+    //     type: 'line',
+    //     data: {
+    //         labels: labels, 
+    //         datasets: [
+    //             {
+    //                 label: 'Sales',
+    //                 data: data, 
+    //                 borderColor: '#4caf50',
+    //                 backgroundColor: 'rgba(76, 175, 80, 0.0)', 
+    //                 fill: true, 
+    //                 tension: 0.4, 
+    //             },
+    //         ],
+    //     },
+    //     options: {
+    //         scales: {
+    //             y: {
+    //                 beginAtZero: true,
+    //                 max: 600,
+    //             },
+    //         },
+    //     },
+    // });
+
+    // Fetch sales data from the PHP script
+    fetch('connection.php')
+            .then(response => response.json())
+            .then(data => {
+                // Extract dates and sales values from the response
+                const labels = data.map(item => item.sale_date);
+                const sales = data.map(item => item.sales);
+
+                // Create the chart
+                const ctx = document.getElementById('salesChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Sales',
+                            data: sales,
+                            borderColor: 'green',
+                            backgroundColor: 'rgba(0, 255, 0, 0.1)',
+                            fill: true,
+                            pointRadius: 5,
+                            pointHoverRadius: 7,
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'top'
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(tooltipItem) {
+                                        return `Sales: ${tooltipItem.raw}`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
 
     // Activity Chart
     var ctx2 = document.getElementById('activityChart').getContext('2d');
