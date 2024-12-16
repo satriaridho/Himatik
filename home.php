@@ -76,74 +76,90 @@
             </div>
 
             <!-- Activity Card -->
-            <div class="card act">
-            <div class="card-header">Activity</div>
-            <div class="card-body">
-                <canvas class="chart" id="activityChart"></canvas>
+
+            <div class="col-md-10" style="width: 550px; height: 400px;">
+    <div class="card" style="color: black;">
+        <div class="card-header">New User</div>
+        <div class="card-body user-list" style="max-height: 531px; overflow-y: auto;">
+            <div class="user-item">
+                <img alt="User profile picture" height="40" src="./img/test.jpeg" width="40" />
+                <div>
+                    <h6 class="mb-0">Nicci Troiani</h6>
+                    <small>Chicago, IL</small>
+                </div>
             </div>
+            <div class="user-item">
+                <img alt="User profile picture" height="40" src="./img/test.jpeg" width="40" />
+                <div>
+                    <h6 class="mb-0">George Fields</h6>
+                    <small>New York, NY</small>
+                </div>
+            </div>
+            <div class="user-item">
+                <img alt="User profile picture" height="40" src="./img/test.jpeg" width="40" />
+                <div>
+                    <h6 class="mb-0">Jones Dermot</h6>
+                    <small>San Francisco, CA</small>
+                </div>
+            </div>
+            <div class="user-item">
+                <img alt="User profile picture" height="40" src="./img/test.jpeg" width="40" />
+                <div>
+                    <h6 class="mb-0">Jones Dermot</h6>
+                    <small>San Francisco, CA</small>
+                </div>
+            </div>
+            <div class="user-item">
+                <img alt="User profile picture" height="40" src="./img/test.jpeg" width="40" />
+                <div>
+                    <h6 class="mb-0">Jones Dermot</h6>
+                    <small>San Francisco, CA</small>
+                </div>
+            </div>
+            <div class="user-item">
+                <img alt="User profile picture" height="40" src="./img/test.jpeg" width="40" />
+                <div>
+                    <h6 class="mb-0">Jones Dermot</h6>
+                    <small>San Francisco, CA</small>
+                </div>
+            </div>
+            <div class="user-item">
+                <img alt="User profile picture" height="40" src="./img/test.jpeg" width="40" />
+                <div>
+                    <h6 class="mb-0">Jones Dermot</h6>
+                    <small>San Francisco, CA</small>
+                </div>
+            </div>
+            <div class="user-item">
+                <img alt="User profile picture" height="40" src="./img/test.jpeg" width="40" />
+                <div>
+                    <h6 class="mb-0">Jones Dermot</h6>
+                    <small>San Francisco, CA</small>
+                </div>
+            </div>
+            <div class="user-item">
+                <img alt="User profile picture" height="40" src="./img/test.jpeg" width="40" />
+                <div>
+                    <h6 class="mb-0">Jones Dermot</h6>
+                    <small>San Francisco, CA</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+            <div class="card-body" style="visibility: hidden;">
+                <canvas class="chart" id="activityChart"></canvas>
             </div>
         </div>
         </div>
 
         <!-- New User and Stock Data -->
         <div class="row">
-        <div class="col-md-4" >
-            <div class="card" style="color: black;">
-            <div class="card-header">New User</div>
-            <div class="card-body user-list">
-                <div class="user-item">
-                <img
-                    alt="User profile picture"
-                    height="40"
-                    src="https://storage.googleapis.com/a1aa/image/aj9sDhcKAioIJBedHNXM9BYg125p4dr7KBWrecBtvrctcK6TA.jpg"
-                    width="40"
-                />
-                <div>
-                    <h6 class="mb-0">Nicci Troiani</h6>
-                    <small>Chicago, IL</small>
-                </div>
-                </div>
-                <div class="user-item">
-                <img
-                    alt="User profile picture"
-                    height="40"
-                    src="https://storage.googleapis.com/a1aa/image/aj9sDhcKAioIJBedHNXM9BYg125p4dr7KBWrecBtvrctcK6TA.jpg"
-                    width="40"
-                />
-                <div>
-                    <h6 class="mb-0">George Fields</h6>
-                    <small>New York, NY</small>
-                </div>
-                </div>
-                <div class="user-item">
-                <img
-                    alt="User profile picture"
-                    height="40"
-                    src="https://storage.googleapis.com/a1aa/image/aj9sDhcKAioIJBedHNXM9BYg125p4dr7KBWrecBtvrctcK6TA.jpg"
-                    width="40"
-                />
-                <div>
-                    <h6 class="mb-0">Jones Dermot</h6>
-                    <small>San Francisco, CA</small>
-                </div>
-                </div>
-                <div class="user-item">
-                    <img
-                        alt="User profile picture"
-                        height="40"
-                        src="https://storage.googleapis.com/a1aa/image/aj9sDhcKAioIJBedHNXM9BYg125p4dr7KBWrecBtvrctcK6TA.jpg"
-                        width="40"
-                    />
-                    <div>
-                        <h6 class="mb-0">Jones Dermot</h6>
-                        <small>San Francisco, CA</small>
-                    </div>
-                    </div>
-            </div>
-            </div>
-        </div>
-
-        <div class="col-md-8 " >
+        
+        <div class="col-md-8 " style="margin-top: -300px; position: sticky; top: 0;">
             <div class="card" style="color: black;">
             <div class="card-header" style="margin-bottom: 10px;">Data Stok
             </div>

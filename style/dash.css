@@ -26,7 +26,6 @@ body {
 .card {
   background-color: #DCD7C9;
   color: #B19470;
-  border: none;
   margin-bottom: 20px;
 }
 .card-header {
@@ -48,12 +47,13 @@ body {
   border-radius: 50%;
   width: 40px;
   height: 40px;
-  margin-right: 10px;
+  margin-right: 20px;
 }
 .user-list .user-item {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 38px;
+  margin-left: 30px;
 }
 .user-list .user-item:last-child {
   margin-bottom: 0;
@@ -137,19 +137,34 @@ body {
   width: 550px;
 }
 
-/* CSS untuk warna font aktif */
 .nav-link.active {
-  color: #76453B; /* Ganti dengan warna yang diinginkan */
-  font-weight: bolder; /* Opsional, agar lebih terlihat */
+  color: #76453B; 
+  font-weight: bolder; 
 }
 
 .nav-link {
-  color: #76453B; /* Ganti dengan warna normal */
+  color: #76453B;
 }
 
 .nav-link:hover {
-  color: #76453B; /* Ganti dengan warna saat hover */
+  color: #76453B; 
 }
 
-
+.user-list::-webkit-scrollbar {
+  width: 8px;  
+}
+.user-list::-webkit-scrollbar-track {
+  background-color: rgba(241, 241, 241, 0.6); 
+  border-radius: 10px; 
+}
+.user-list::-webkit-scrollbar-thumb {
+  background-color: rgba(136, 136, 136, 0.7); 
+  border-radius: 10px; 
+}
+.user-list::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(85, 85, 85, 0.9);
+}
+.user-list::-webkit-scrollbar-button {
+  display: none; 
+}
 
