@@ -1,6 +1,5 @@
 <?php
 include 'session.php';
-requireLogin();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,12 +19,14 @@ requireLogin();
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
 <link rel="stylesheet" href="./style/dash.css" />
+
 </head>
 <body>
 <div class="container-fluid">
     <div class="row">
     <!-- Sidebar -->
-    <div class="col-md-2 sidebar">
+  
+    <div class="col-md-2 sidebar" style="position: fixed; height: 100vh; z-index: 111111; ">
         <nav class="nav flex-column">
         <h1 style="color: #76453b; font-weight: bold; opacity: 0.7;">Dashboard Admin</h1>
         <br />
@@ -36,7 +37,7 @@ requireLogin();
         <a class="nav-link" href="index.php?page=stok">
             <i class="fas fa-box"></i> Manajemen Stok
         </a>
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="index.php?page=users">
             <i class="fas fa-users"></i> Users
         </a>
         
@@ -75,6 +76,8 @@ requireLogin();
 ></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="./js/main.js"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
     <!-- Content -->
-    <div class="col-md-9 content">
+    <div class="col-md-9 content" style="margin-left: 340px;">
         <!-- Statistics Cards -->
         <div class="row">
 

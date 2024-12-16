@@ -6,6 +6,7 @@ body {
   background-color: #DCD7C9;
   padding: 20px;
   margin-right: 30px;
+  height: 100vh;
 }
 .sidebar .nav-link {
   color: #8a7e6d;
