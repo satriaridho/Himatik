@@ -9,10 +9,10 @@ const updateCalendar = () => {
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
 
-  const firstDay = new Date(year, month, 1);  // Pertama bulan
-  const lastDay = new Date(year, month + 1, 0);  // Terakhir bulan
+  const firstDay = new Date(year, month, 1);  
+  const lastDay = new Date(year, month + 1, 0);  
   const daysInMonth = lastDay.getDate();
-  const firstDayIndex = firstDay.getDay() === 0 ? 6 : firstDay.getDay() - 1;  // Mengubah hari pertama (Sunday => 0)
+  const firstDayIndex = firstDay.getDay() === 0 ? 6 : firstDay.getDay() - 1; 
 
   const monthYearString = currentDate.toLocaleString('default', { month: 'long', year: 'numeric' });
   monthYearElemen.textContent = monthYearString;
@@ -43,77 +43,24 @@ const updateCalendar = () => {
 }
 
 prevBtn.addEventListener('click', () => {
-  currentDate.setMonth(currentDate.getMonth() - 1); // Navigasi mundur ke bulan sebelumnya
+  currentDate.setMonth(currentDate.getMonth() - 1); 
   updateCalendar();
 });
 
 nextBtn.addEventListener('click', () => {
-  currentDate.setMonth(currentDate.getMonth() + 1); // Navigasi maju ke bulan berikutnya
+  currentDate.setMonth(currentDate.getMonth() + 1); 
   updateCalendar();
 });
 
 updateCalendar();
 
-// Pilih semua link di sidebar
 const navLinks = document.querySelectorAll('.nav-link');
 
-// Tambahkan event listener untuk setiap link
 navLinks.forEach(link => {
     link.addEventListener('click', function() {
-        // Hapus kelas active dari semua link
         navLinks.forEach(item => item.classList.remove('active'));
         
-        // Tambahkan kelas active ke link yang diklik
         this.classList.add('active');
     });
 });
 
-// pagination
-// Sample data (this should be replaced with your actual data)
-const totalData = 1240;
-let rowsPerPage = 8; // default rows per page
-let currentPage = 1;
-
-// Function to update the table or data display based on current page and rows per page
-function updateTable() {
-    rowsPerPage = parseInt(document.getElementById("rowsPerPage").value);
-    currentPage = 1; // Reset to the first page when rows per page changes
-    displayData();
-}
-
-// Function to display data for the current page
-function displayData() {
-    const start = (currentPage - 1) * rowsPerPage + 1;
-    const end = Math.min(currentPage * rowsPerPage, totalData);
-    const pageInfo = `${start}-${end} of ${totalData}`;
-    document.getElementById("pageInfo").textContent = pageInfo;
-
-    // Show the data dynamically (replace with actual data rendering)
-    const dataContainer = document.getElementById("dataContainer");
-    dataContainer.innerHTML = ""; // Clear previous data (for demo purposes)
-    for (let i = start; i <= end; i++) {
-        const item = document.createElement("div");
-        item.textContent = `Item ${i}`;
-        dataContainer.appendChild(item);
-    }
-}
-
-// Function to go to the previous page
-function previousPage() {
-    if (currentPage > 1) {
-        currentPage--;
-        displayData();
-    }
-}
-
-// Function to go to the next page
-function nextPage() {
-    const totalPages = Math.ceil(totalData / rowsPerPage);
-    if (currentPage < totalPages) {
-        currentPage++;
-        displayData();
-    }
-}
-
-// Initialize the data display
-displayData();
