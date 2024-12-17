@@ -6,7 +6,6 @@ body {
   background-color: #DCD7C9;
   padding: 20px;
   margin-right: 30px;
-  height: 100vh;
 }
 .sidebar .nav-link {
   color: #8a7e6d;
@@ -60,7 +59,6 @@ body {
 }
 
 .calendar {
-  margin-top: -152px;
   width: 550px;
   font-family: Arial, sans-serif;
   border-radius: 5px;
@@ -168,3 +166,6 @@ body {
   display: none; 
 }
 
+.gridd{
+  margin-left: -30px;
+}

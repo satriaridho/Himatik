@@ -107,10 +107,10 @@ try {
                 </div>
                 <div class="pagination" style="margin-left: 20px;">
                     <span id="pageInfo"><?php echo "1 - " . ($offset + count($products)) . " of $totalProducts"; ?></span>
-                    <a href="index.php?page=products&page_num=<?php echo max(1, $page - 1); ?>&rows_per_page=<?php echo $rowsPerPage; ?>" class="pagination-btn" <?php if ($page <= 1) echo 'disabled'; ?>>
+                    <a href="index.php?page=stok&page_num=<?php echo max(1, $page - 1); ?>&rows_per_page=<?php echo $rowsPerPage; ?>" class="pagination-btn" <?php if ($page <= 1) echo 'disabled'; ?>>
                         <i class="fas fa-chevron-left" style="color: white;"></i>
                     </a>
-                    <a href="index.php?page=products&page_num=<?php echo min($totalPages, $page + 1); ?>&rows_per_page=<?php echo $rowsPerPage; ?>" class="pagination-btn" <?php if ($page >= $totalPages) echo 'disabled'; ?>>
+                    <a href="index.php?page=stok&page_num=<?php echo min($totalPages, $page + 1); ?>&rows_per_page=<?php echo $rowsPerPage; ?>" class="pagination-btn" <?php if ($page >= $totalPages) echo 'disabled'; ?>>
                         <i class="fas fa-chevron-right" style="color: white;"></i>
                     </a>
                 </div>

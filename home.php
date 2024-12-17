@@ -28,108 +28,102 @@ try {
 }
 ?>
 <!-- Content -->
-    <div class="col-md-9 content" style="margin-left: 340px;">
-        <!-- Statistics Cards -->
-        <div class="row">
-
-            <div class="col-md-2">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <i class="fas fa-users fa-2x mb-2"></i>
-                        <p><?php echo htmlspecialchars($totalUsers); ?></p>
-                        <p>Users</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <i class="fas fa-bell fa-2x mb-2"></i>
-                        <p><?php echo htmlspecialchars($totalNotifications); ?></p>
-                        <p>Notifications</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="col-md-9 content" style="margin-left: 340px; ">
+    <h1 style="visibility: hidden;">hehe</h1>
+    <!-- Statistics Cards -->
+    <div class="row">
 
         <!-- Charts and Calendar -->
         <div class="row">
-        <div class="col-md-8">
-            <div class="card">
-            <div class="card-header">Sales</div>
-            <div class="card-body">
-                <canvas class="chart" id="salesChart"></canvas>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Sales</div>
+                    <div class="card-body">
+                        <canvas class="chart" id="salesChart"></canvas>
+                    </div>
+                </div>
             </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <!-- Calendar -->
-            <div class="calendar" style="margin-bottom: 20px;">
-            <div class="headr">
-                <button id="prev" class="prev">
-                <i class="fa-solid fa-chevron-left"></i>
-                </button>
-                <span id="monthYear"></span>
-                <button id="next" class="next">
-                <i class="fa-solid fa-chevron-right"></i>
-                </button>
-            </div>
-            <div class="days">
-                <div class="day">Mon</div>
-                <div class="day">Tue</div>
-                <div class="day">Wed</div>
-                <div class="day">Thu</div>
-                <div class="day">Fri</div>
-                <div class="day">Sat</div>
-                <div class="day">Sun</div>
-            </div>
-            <div id="dates" class="dates"></div>
-            </div>
+            <div class="col-md-4">
+                <!-- Calendar -->
+                <div class="calendar" style="margin-bottom: 20px; margin-top: 0;">
+                    <div class="headr">
+                        <button id="prev" class="prev">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <span id="monthYear"></span>
+                        <button id="next" class="next">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <div class="days">
+                        <div class="day">Mon</div>
+                        <div class="day">Tue</div>
+                        <div class="day">Wed</div>
+                        <div class="day">Thu</div>
+                        <div class="day">Fri</div>
+                        <div class="day">Sat</div>
+                        <div class="day">Sun</div>
+                    </div>
+                    <div id="dates" class="dates"></div>
+                </div>
 
-            <!-- Activity Card -->
-
-            <div class="col-md-10" style="width: 550px; height: 400px;">
-                <div class="card" style="color: black;">
-                    <div class="card-header">New Users</div>
-                    <div class="card-body user-list" style="max-height: 400px; overflow-y: auto;">
-                        <?php if (!empty($new_users)): ?>
-                            <?php foreach ($new_users as $user): ?>
-                                <div class="user-item">
-                                    <div>
-                                        <h6 class="mb-0"><?php echo htmlspecialchars($user['username']); ?></h6>
-                                        <small>Joined on <?php echo htmlspecialchars($user['join_date']); ?></small>
-                                    </div>
+                <div class="container-fluid" style="margin-left: -12px; margin-top: 27px;">
+                    <div class="row " style="width: 572px;">
+                        <div class="col-md-6">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <i class="fas fa-users fa-2x mb-2"></i>
+                                    <p><?php echo htmlspecialchars($totalUsers); ?></p>
+                                    <p>Users</p>
                                 </div>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <p>No new users in the last 7 days.</p>
-                        <?php endif; ?>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <i class="fas fa-bell fa-2x mb-2"></i>
+                                    <p><?php echo htmlspecialchars($totalNotifications); ?></p>
+                                    <p>Notifications</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-10" style="width: 550px; height: 400px;">
+                    <div class="card" style="color: black;">
+                        <div class="card-header">New Users</div>
+                        <div class="card-body user-list" style="max-height: 202px; overflow-y: auto;">
+                            <?php if (!empty($new_users)): ?>
+                                <?php foreach ($new_users as $user): ?>
+                                    <div class="user-item">
+                                        <div>
+                                            <h6 class="mb-0"><?php echo htmlspecialchars($user['username']); ?></h6>
+                                            <small>Joined on <?php echo htmlspecialchars($user['join_date']); ?></small>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <p>No new users in the last 7 days.</p>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="card-body" style="visibility: hidden;">
-                <canvas class="chart" id="activityChart"></canvas>
-            </div>
-        </div>
-        </div>
-
-        <!-- New User and Stock Data -->
-        <div class="row">
-        
-        <div class="col-md-8 " style="margin-top: -300px; position: sticky; top: 0;">
-            <div class="card" style="color: black;">
-            <div class="card-header" style="margin-bottom: 10px;">Data Stok
-            </div>
-            <div id="chart_div" style="font-size: small; height: 212px; border-radius: 5px;"></div>    
+            <div class="" style="margin-left: 0; width: 1350px;">
+                <div class="col-md-8" style="position: relative; margin-top: -400px;">
+                    <div class="card" style="color: black;">
+                        <div class="card-header" style="margin-bottom: 10px;">Data Stok</div>
+                        <div id="chart_div" style="font-size: small; height: 212px; border-radius: 5px;"></div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        
-        </div>
-    </div>
     </div>
 </div>
+
 
 <script
     crossorigin="anonymous"
@@ -197,28 +191,7 @@ fetch('sales_chart_connection.php')
     })
     .catch(error => console.error('Error fetching data:', error));
 
-    // Activity Chart
-    var ctx2 = document.getElementById('activityChart').getContext('2d');
-    var activityChart = new Chart(ctx2, {
-    type: 'bar',
-    data: {
-        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-        datasets: [
-        {
-            label: 'Activity',
-            data: [5, 10, 15, 20, 25, 30, 35],
-            backgroundColor: '#4caf50',
-        },
-        ],
-    },
-    options: {
-        scales: {
-        y: {
-            beginAtZero: true,
-        },
-        },
-    },
-    });
+
 
     // chart data stok
 google.charts.load('current', {'packages':['bar']});
@@ -238,7 +211,7 @@ function drawChart() {
                 bars: 'horizontal', // Required for Material Bar Charts.
                 hAxis: { format: 'decimal' },
                 height: 200,  // Adjust the height of the entire chart
-                width: 850,   // Adjust the width of the entire chart
+                width: 800,   // Adjust the width of the entire chart
                 colors: ['#43766C', '#12372A'],
                 backgroundColor: '#DCD7C9',
                 chartArea: {
@@ -249,7 +222,7 @@ function drawChart() {
                     bottom: 40  // Optional: Space below the chart
                 },
                 barGroupWidth: 50, // Controls the gap between groups (i.e., the bars for 'Stok' and 'Terjual')
-                barSpacing: 30,    // Controls the spacing between the bars in each group
+                barSpacing: 50,    // Controls the spacing between the bars in each group
             };
 
             var chart = new google.charts.Bar(document.getElementById('chart_div'));

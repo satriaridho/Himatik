@@ -50,6 +50,7 @@ try {
                         </div>
                     </div>
                 </div>
+                
 
                 <!-- Recent Notification Items -->
                 <?php foreach ($recent_notifications as $notification): ?>
@@ -87,3 +88,4 @@ try {
         </div>
     </div>
 </div>
+<script src="./js/download.js"></script>
