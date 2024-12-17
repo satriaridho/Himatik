@@ -1,3 +1,25 @@
+<?php
+include 'config.php';
+
+try {
+    // Connect to the database
+    $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Query to fetch product data
+    $stmt = $pdo->prepare("
+        SELECT product_id, product_name, category, stock, harga_barang 
+        FROM products
+    ");
+    $stmt->execute();
+
+    // Fetch data as an associative array
+    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
+?>
 <link rel="stylesheet" href="./style/table.css">
 <div class="col-md-9 content" style="margin-left: 400px;" >
 <div class="row">
@@ -20,9 +42,8 @@
         </div>
     </div>
         <table id="dataContainer">
-            <thead style="color: #D5CEC0; ">
-  
-                <tr >
+            <thead style="color: #D5CEC0;">
+                <tr>
                     <th>No</th>
                     <th>Nama Barang</th>
                     <th>Kategori Barang</th>
@@ -32,18 +53,19 @@
                 </tr>
             </thead>
             <tbody>
+                <?php foreach ($products as $product): ?>
                 <tr>
-                    <td>1</td>
-                    <td>Sabun</td>
-                    <td>Elektronik</td>
-                    <td>70</td>
-                    <td>100.000</td>
-                    <td class="action-buttons" >
-                        <a class="edit-btn" href="index.php?page=edititem" style="text-decoration: none;">EDIT</a>
-                        <a class="delete-btn" href="index.php?page=hapusitem" style="text-decoration: none;">DELETE</a>
+                    <td><?php echo htmlspecialchars($product['product_id']); ?></td>
+                    <td><?php echo htmlspecialchars($product['product_name']); ?></td>
+                    <td><?php echo htmlspecialchars($product['category']); ?></td>
+                    <td><?php echo htmlspecialchars($product['stock']); ?></td>
+                    <td><?php echo htmlspecialchars($product['harga_barang']); ?></td>
+                    <td class="action-buttons">
+                        <a class="edit-btn" href="index.php?page=edititem&product_id=<?php echo $product['product_id']; ?>" style="text-decoration: none;">EDIT</a>
+                        <a class="delete-btn" href="index.php?page=deleteitem&product_id=<?php echo $product['product_id']; ?>" style="text-decoration: none;">DELETE</a>
                     </td>
                 </tr>
-                
+                <?php endforeach; ?>
             </tbody>
         </table>
 <div class="footer d-flex justify-content-center align-items-center" style="color: #DCD7C9;">
