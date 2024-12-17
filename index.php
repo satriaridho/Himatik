@@ -41,7 +41,7 @@ include 'session.php';
             <i class="fas fa-users"></i> Users
         </a>
         
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="?page=notif">
             <i class="fas fa-bell"></i> Notifications
         </a>
         <div> 

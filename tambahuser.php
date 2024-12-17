@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <input type="text" id="UserAddress" name="address" required placeholder="Address">
 
-                <button type="submit" class="btn btn-primary" style="background-color: #DCD7C9; color: #76453B; margin-bottom: 10px;">Tambah Item</button>
+                <button type="submit" class="btn btn-primary" style="background-color: #DCD7C9; color: #76453B; margin-bottom: 10px;">Tambah User</button>
                 <a href="index.php?page=users" class="btn btn-primary" style="background-color: #DCD7C9; color: #76453B;">Kembali</a>
             </form>
         </div>
