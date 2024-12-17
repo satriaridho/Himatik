@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2024 at 01:10 PM
+-- Generation Time: Dec 17, 2024 at 01:48 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -44,14 +44,36 @@ INSERT INTO `admin` (`admin_id`, `username`, `email`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `product_id` int(11) NOT NULL,
+  `product_name` varchar(255) NOT NULL,
+  `category` enum('Makanan','Minuman','Alat Tulis','Lain Lain') NOT NULL,
+  `stock` int(11) NOT NULL,
+  `harga_barang` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`product_id`, `product_name`, `category`, `stock`, `harga_barang`) VALUES
+(1, 'Ayam Goyeng', 'Makanan', 12, 15000),
+(2, 'Es Gondang Winangun', 'Minuman', 14, 10000),
+(4, 'Pensil', 'Alat Tulis', 15, 3000),
+(5, 'parfum', 'Lain Lain', 15, 75000);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sales_data`
 --
 
 CREATE TABLE `sales_data` (
   `id` int(11) NOT NULL,
-  `product_name` varchar(255) NOT NULL,
-  `category` enum('Makanan','Minuman','Alat Tulis','') NOT NULL,
-  `stock` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
   `sale_date` date NOT NULL,
   `sales` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -60,18 +82,20 @@ CREATE TABLE `sales_data` (
 -- Dumping data for table `sales_data`
 --
 
-INSERT INTO `sales_data` (`id`, `product_name`, `category`, `stock`, `sale_date`, `sales`) VALUES
-(1, 'Ayam Kadal', 'Makanan', 12, '2024-12-14', 10),
-(2, 'Es Gelas', 'Minuman', 59, '2024-12-14', 20),
-(3, 'Joko kendil', 'Alat Tulis', 80, '2024-12-13', 15);
+INSERT INTO `sales_data` (`id`, `product_id`, `sale_date`, `sales`) VALUES
+(4, 1, '2024-12-17', 20),
+(5, 2, '2024-12-17', 20),
+(6, 1, '2024-12-16', 15),
+(7, 4, '2024-12-17', 20),
+(8, 5, '2024-12-17', 10);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Table structure for table `users`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `username` varchar(16) NOT NULL,
   `email` varchar(50) NOT NULL,
@@ -89,15 +113,22 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`admin_id`);
 
 --
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`product_id`);
+
+--
 -- Indexes for table `sales_data`
 --
 ALTER TABLE `sales_data`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
--- Indexes for table `user`
+-- Indexes for table `users`
 --
-ALTER TABLE `user`
+ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`);
 
 --
@@ -111,16 +142,32 @@ ALTER TABLE `admin`
   MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `sales_data`
 --
 ALTER TABLE `sales_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT for table `users`
 --
-ALTER TABLE `user`
+ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `sales_data`
+--
+ALTER TABLE `sales_data`
+  ADD CONSTRAINT `sales_data_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
