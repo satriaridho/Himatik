@@ -1,4 +1,6 @@
 <?php
+requireLogin();
+requireAdmin();
 include 'config.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -15,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     try {
         // Connect to the database
-        $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Insert data into the database
@@ -28,6 +30,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(':password', $user_hashed_password);
         $stmt->bindParam(':join_date', $user_join_date);
         $stmt->bindParam(':address', $user_address);
+        $stmt->execute();
+
+        // Insert notification
+        $admin_name = getAdminName();
+        $notification_message = "New User Signup by $admin_name: $user_name has joined.";
+        $stmt = $pdo->prepare("INSERT INTO notifications (message) VALUES (:message)");
+        $stmt->bindParam(':message', $notification_message);
         $stmt->execute();
 
         echo "<script>alert('User berhasil ditambahkan!'); window.location.href='index.php?page=users';</script>";
@@ -52,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <input type="text" id="UserEmail" name="email" required placeholder="Email">
 
-                <input type="text" id="UserPassword" name="password" required placeholder="Password">
+                <input type="password" id="UserPassword" name="password" required placeholder="Password">
 
                 <input type="text" id="UserAddress" name="address" required placeholder="Address">
 

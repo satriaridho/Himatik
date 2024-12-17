@@ -1,4 +1,6 @@
 <?php
+requireLogin();
+requireAdmin();
 include 'config.php';
 
 $product_id = isset($_GET['product_id']) ? intval($_GET['product_id']) : null;
@@ -16,33 +18,70 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     try {
         // Connect to the database
-        $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        // Update data in the database
+        // Fetch existing data for the product
+        $stmt = $pdo->prepare("SELECT * FROM products WHERE product_id = :product_id");
+        $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $existing_product = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$existing_product) {
+            echo "<script>alert('Product not found!'); window.location.href='index.php?page=stok';</script>";
+            exit;
+        }
+
+        // Update the product in the database
         $stmt = $pdo->prepare("
             UPDATE products 
-            SET product_name = :product_name, category = :category, stock = :stock, harga_barang = :harga_barang 
+            SET product_name = :product_name, category = :category, stock = :stock, harga_barang = :harga_barang
             WHERE product_id = :product_id
         ");
         $stmt->bindParam(':product_name', $product_name);
         $stmt->bindParam(':category', $category);
         $stmt->bindParam(':stock', $stock);
         $stmt->bindParam(':harga_barang', $harga_barang);
-        $stmt->bindParam(':product_id', $product_id);
+        $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
         $stmt->execute();
 
-        echo "<script>alert('Item berhasil diperbarui!'); window.location.href='index.php?page=stok';</script>";
+        // Insert notification
+        $admin_name = getAdminName(); // Function to get the admin's name
+        $notification_message = "$admin_name updated product {$existing_product['product_name']}: ";
+
+        $changes = [];
+        if ($existing_product['product_name'] != $product_name) {
+            $changes[] = "name from '{$existing_product['product_name']}' to '$product_name'";
+        }
+        if ($existing_product['category'] != $category) {
+            $changes[] = "category from '{$existing_product['category']}' to '$category'";
+        }
+        if ($existing_product['stock'] != $stock) {
+            $changes[] = "stock from '{$existing_product['stock']}' to '$stock'";
+        }
+        if ($existing_product['harga_barang'] != $harga_barang) {
+            $changes[] = "price from '{$existing_product['harga_barang']}' to '$harga_barang'";
+        }
+
+        if (!empty($changes)) {
+            $notification_message .= implode(", ", $changes) . ".";
+
+            $stmt = $pdo->prepare("INSERT INTO notifications (message) VALUES (:message)");
+            $stmt->bindParam(':message', $notification_message);
+            $stmt->execute();
+        }
+
+        echo "<script>alert('Product updated successfully!'); window.location.href='index.php?page=stok';</script>";
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
 } else {
     try {
         // Connect to the database
-        $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        // Fetch existing data for the item
+        // Fetch existing data for the product
         $stmt = $pdo->prepare("SELECT * FROM products WHERE product_id = :product_id");
         $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
         $stmt->execute();
@@ -58,7 +97,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-
 <link rel="stylesheet" href="./style/input.css">
 <div class="col-md-9 content" style="margin-left: 400px;">
     <div class="row">
@@ -78,7 +116,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <option value="Makanan" <?php echo $product['category'] == 'Makanan' ? 'selected' : ''; ?>>Makanan</option>
                     <option value="Minuman" <?php echo $product['category'] == 'Minuman' ? 'selected' : ''; ?>>Minuman</option>
                     <option value="Alat Tulis" <?php echo $product['category'] == 'Alat Tulis' ? 'selected' : ''; ?>>Alat Tulis</option>
-                    <option value="Lain Lain" <?php echo $product['category'] == 'Lain Lain' ? 'selected' : ''; ?>>Lain Lain</option>
                 </select>
 
                 <input type="number" name="stock" id="itemStock" required placeholder="Stok Barang" value="<?php echo htmlspecialchars($product['stock']); ?>">

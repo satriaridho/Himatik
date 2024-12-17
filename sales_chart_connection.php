@@ -2,13 +2,14 @@
 include 'config.php';
 try {
     // Connect to the database
-    $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Query to fetch sales data grouped by sale_date
+    // Query to fetch sales data from the past 7 days grouped by sale_date
     $stmt = $pdo->prepare("
         SELECT sale_date, SUM(sales) as total_sales 
         FROM sales_data 
+        WHERE sale_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
         GROUP BY sale_date 
         ORDER BY sale_date
     ");

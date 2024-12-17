@@ -1,5 +1,7 @@
 <?php
 include 'session.php';
+requireLogin();
+requireAdmin();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,16 +39,21 @@ include 'session.php';
         <a class="nav-link" href="index.php?page=stok">
             <i class="fas fa-box"></i> Manajemen Stok
         </a>
+
+        <a class="nav-link" href="index.php?page=penjualan">
+            <i class="fas fa-box"></i> Manajemen Penjualan
+        </a>
+
         <a class="nav-link" href="index.php?page=users">
             <i class="fas fa-users"></i> Users
         </a>
-        
+
         <a class="nav-link" href="?page=notif">
             <i class="fas fa-bell"></i> Notifications
         </a>
         <div> 
-            <a class="nav-link" href="logout.php">
-                <i class="fas fa-sign-out-alt"></i> Logout
+            <a class="nav-link" href="logout.php" onclick="return confirm('Apakah anda yakin ingin logout?')">
+                <i class="fas fa-sign-out-alt" ></i> Logout
             </a>
         </div>
         </nav>

@@ -9,6 +9,10 @@ function isAdmin() {
     return isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
 }
 
+function getAdminName() {
+    return isset($_SESSION['username']) ? $_SESSION['username'] : 'Admin';
+}
+
 function requireLogin() {
     if (!isLoggedIn()) {
         header("Location: login.php");

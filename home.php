@@ -1,44 +1,55 @@
-    <!-- Content -->
+<?php
+include 'config.php';
+
+try {
+    // Connect to the database
+    $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Fetch users who have joined within the last 7 days
+    $stmt = $pdo->prepare("SELECT username, join_date FROM users WHERE join_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) ORDER BY join_date DESC");
+    $stmt->execute();
+    $new_users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Fetch total number of users
+    $stmt = $pdo->prepare("SELECT COUNT(*) AS total_users FROM users");
+    $stmt->execute();
+    $userCountResult = $stmt->fetch(PDO::FETCH_ASSOC);
+    $totalUsers = $userCountResult['total_users'];
+
+    // Fetch total number of notifications
+    $stmt = $pdo->prepare("SELECT COUNT(*) AS total_notifications FROM notifications");
+    $stmt->execute();
+    $notificationCountResult = $stmt->fetch(PDO::FETCH_ASSOC);
+    $totalNotifications = $notificationCountResult['total_notifications'];
+
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
+?>
+<!-- Content -->
     <div class="col-md-9 content" style="margin-left: 340px;">
         <!-- Statistics Cards -->
         <div class="row">
 
-        <div class="col-md-2">
-            <div class="card text-center">
-            <div class="card-body">
-                <i class="fas fa-users fa-2x mb-2"></i>
-                <p>100</p>
-                <p>Users</p>
+            <div class="col-md-2">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-users fa-2x mb-2"></i>
+                        <p><?php echo htmlspecialchars($totalUsers); ?></p>
+                        <p>Users</p>
+                    </div>
+                </div>
             </div>
+            <div class="col-md-2">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <i class="fas fa-bell fa-2x mb-2"></i>
+                        <p><?php echo htmlspecialchars($totalNotifications); ?></p>
+                        <p>Notifications</p>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card text-center">
-            <div class="card-body">
-                <i class="fas fa-check-square fa-2x mb-2"></i>
-                <p>32</p>
-                <p>Completed</p>
-            </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card text-center">
-            <div class="card-body">
-                <i class="fas fa-bell fa-2x mb-2"></i>
-                <p>2</p>
-                <p>Notifications</p>
-            </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card text-center">
-            <div class="card-body">
-                <i class="fas fa-exclamation-triangle fa-2x mb-2"></i>
-                <p>4</p>
-                <p>Reports</p>
-            </div>
-            </div>
-        </div>
         </div>
 
         <!-- Charts and Calendar -->
@@ -78,77 +89,24 @@
             <!-- Activity Card -->
 
             <div class="col-md-10" style="width: 550px; height: 400px;">
-    <div class="card" style="color: black;">
-        <div class="card-header">New User</div>
-        <div class="card-body user-list" style="max-height: 531px; overflow-y: auto;">
-            <div class="user-item">
-                <img alt="User profile picture" height="40" src="./img/test.jpeg" width="40" />
-                <div>
-                    <h6 class="mb-0">Nicci Troiani</h6>
-                    <small>Chicago, IL</small>
+                <div class="card" style="color: black;">
+                    <div class="card-header">New Users</div>
+                    <div class="card-body user-list" style="max-height: 400px; overflow-y: auto;">
+                        <?php if (!empty($new_users)): ?>
+                            <?php foreach ($new_users as $user): ?>
+                                <div class="user-item">
+                                    <div>
+                                        <h6 class="mb-0"><?php echo htmlspecialchars($user['username']); ?></h6>
+                                        <small>Joined on <?php echo htmlspecialchars($user['join_date']); ?></small>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <p>No new users in the last 7 days.</p>
+                        <?php endif; ?>
+                    </div>
                 </div>
             </div>
-            <div class="user-item">
-                <img alt="User profile picture" height="40" src="./img/test.jpeg" width="40" />
-                <div>
-                    <h6 class="mb-0">George Fields</h6>
-                    <small>New York, NY</small>
-                </div>
-            </div>
-            <div class="user-item">
-                <img alt="User profile picture" height="40" src="./img/test.jpeg" width="40" />
-                <div>
-                    <h6 class="mb-0">Jones Dermot</h6>
-                    <small>San Francisco, CA</small>
-                </div>
-            </div>
-            <div class="user-item">
-                <img alt="User profile picture" height="40" src="./img/test.jpeg" width="40" />
-                <div>
-                    <h6 class="mb-0">Jones Dermot</h6>
-                    <small>San Francisco, CA</small>
-                </div>
-            </div>
-            <div class="user-item">
-                <img alt="User profile picture" height="40" src="./img/test.jpeg" width="40" />
-                <div>
-                    <h6 class="mb-0">Jones Dermot</h6>
-                    <small>San Francisco, CA</small>
-                </div>
-            </div>
-            <div class="user-item">
-                <img alt="User profile picture" height="40" src="./img/test.jpeg" width="40" />
-                <div>
-                    <h6 class="mb-0">Jones Dermot</h6>
-                    <small>San Francisco, CA</small>
-                </div>
-            </div>
-            <div class="user-item">
-                <img alt="User profile picture" height="40" src="./img/test.jpeg" width="40" />
-                <div>
-                    <h6 class="mb-0">Jones Dermot</h6>
-                    <small>San Francisco, CA</small>
-                </div>
-            </div>
-            <div class="user-item">
-                <img alt="User profile picture" height="40" src="./img/test.jpeg" width="40" />
-                <div>
-                    <h6 class="mb-0">Jones Dermot</h6>
-                    <small>San Francisco, CA</small>
-                </div>
-            </div>
-            <div class="user-item">
-                <img alt="User profile picture" height="40" src="./img/test.jpeg" width="40" />
-                <div>
-                    <h6 class="mb-0">Jones Dermot</h6>
-                    <small>San Francisco, CA</small>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 
             <div class="card-body" style="visibility: hidden;">
                 <canvas class="chart" id="activityChart"></canvas>
@@ -183,67 +141,61 @@
 <script src="./js/main.js"></script>
 <script>
 
-    // Fetch sales data from the PHP script
-    fetch('sales_chart_connection.php')
-        .then(response => response.json())
-        .then(data => {
-            // Extract dates, sales, product names, and categories from the response
-            const labels = data.map(item => item.sale_date);
-            const sales = data.map(item => item.total_sales);
-            // const productNames = data.map(item => item.product_name);
-            // const categories = data.map(item => item.category);
+fetch('sales_chart_connection.php')
+    .then(response => response.json())
+    .then(data => {
+        // Extract dates and sales from the response
+        const labels = data.map(item => item.sale_date);
+        const sales = data.map(item => item.total_sales);
 
-            // Create the chart
-            const ctx = document.getElementById('salesChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Sales',
-                        data: sales,
-                        borderColor: 'green',
-                        backgroundColor: 'rgba(0, 255, 0, 0.1)',
-                        fill: true,
-                        pointRadius: 5,
-                        pointHoverRadius: 7,
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top'
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(tooltipItem) {
-                                    // Show sales, product name, and category in the tooltip
-                                    const index = tooltipItem.dataIndex;
-                                    const salesValue = sales[index];
-                                    // const product = productNames[index];
-                                    // const category = categories[index];
-                                    return [
-                                        `Sales: ${salesValue}`,
-                                        // `Product: ${product}`,
-                                        // `Category: ${category}`
-                                    ];
-                                }
+        // Calculate the maximum y-axis value with a 10% margin
+        const maxSales = Math.max(...sales);
+        const yAxisMax = maxSales * 1.1; // Add 10% margin
+
+        // Create the chart
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Sales',
+                    data: sales,
+                    borderColor: 'green',
+                    backgroundColor: 'rgba(0, 255, 0, 0.1)',
+                    fill: true,
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                const index = tooltipItem.dataIndex;
+                                const salesValue = sales[index];
+                                return `Sales: ${salesValue}`;
                             }
                         }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            max: 100
-                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: yAxisMax
                     }
                 }
-            });
-        })
-        .catch(error => console.error('Error fetching data:', error));
+            }
+        });
+    })
+    .catch(error => console.error('Error fetching data:', error));
 
     // Activity Chart
     var ctx2 = document.getElementById('activityChart').getContext('2d');

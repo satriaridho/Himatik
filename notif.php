@@ -1,3 +1,26 @@
+<?php
+include 'config.php';
+
+try {
+    // Connect to the database
+    $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Fetch recent notifications (less than 7 days old)
+    $stmt = $pdo->prepare("SELECT * FROM notifications WHERE created_at >= NOW() - INTERVAL 7 DAY ORDER BY created_at DESC");
+    $stmt->execute();
+    $recent_notifications = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Fetch older notifications (7 days or more)
+    $stmt = $pdo->prepare("SELECT * FROM notifications WHERE created_at < NOW() - INTERVAL 7 DAY ORDER BY created_at DESC");
+    $stmt->execute();
+    $older_notifications = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
+?>
+
 <link rel="stylesheet" href="./style/notif.css">
 <div class="col-md-9 content" style="margin-left: 400px;">
     <div class="row">
@@ -10,7 +33,7 @@
                     Recent
                 </div>
                 <div class="progress-container">
-                <p style="margin-left: 20px; margin-bottom: -10px; font-weight: bold;">Unduh Data Barang </p>
+                    <p style="margin-left: 20px; margin-bottom: -10px; font-weight: bold;">Unduh Data Barang </p>
                     <div class="d-flex align-items-center">
                         <i class="fas fa-file-download fa-2x ms-4"></i>
                         <div class="flex-grow-1 ms-5 mt-4">
@@ -28,41 +51,39 @@
                     </div>
                 </div>
 
-                <!-- Notification Items -->
+                <!-- Recent Notification Items -->
+                <?php foreach ($recent_notifications as $notification): ?>
                 <div class="notification-item">
-                    <img alt="Profile picture of Admin 1" height="50" src="https://storage.googleapis.com/a1aa/image/cFbnm3qRnvodP5b10xVrvBD0z6HTAairfV6bzyvFynI3g29JA.jpg" width="50"/>
                     <div class="content">
-                        <strong>Admin 1</strong><br/>
-                        Menambahkan stok sejumlah 10 barang untuk barang bernama Sabun dengan kategori Elektronik
+                        <?php echo htmlspecialchars($notification['message']); ?>
                     </div>
                     <div class="time">
-                        just now
+                        <?php echo htmlspecialchars($notification['created_at']); ?>
                     </div>
                 </div>
+                <?php endforeach; ?>
                 
                 <div class="section-header" style="padding: 20px; border-radius: 0 0 5px 5px;"></div>
             </div> 
 
             <div class="cont">
                 <div class="section-header mt-3" style="border-radius: 5px 5px 0 0;">
-                    Earlier
+                    Older
                 </div>
+                <!-- Older Notification Items -->
+                <?php foreach ($older_notifications as $notification): ?>
                 <div class="notification-item">
-                    <img alt="Profile picture of User 5" height="50" src="https://storage.googleapis.com/a1aa/image/xNyUPch65c7DEpckKqMf8g1Un2ZB9oxwVxVK4p0S9ww3g29JA.jpg" width="50"/>
                     <div class="content">
-                        <strong>User 5</strong><br/>
-                        Just registered as a new user
+                        <?php echo htmlspecialchars($notification['message']); ?>
                     </div>
                     <div class="time">
-                        yesterday
+                        <?php echo htmlspecialchars($notification['created_at']); ?>
                     </div>
                 </div>
-
+                <?php endforeach; ?>
+                
                 <div class="section-header" style="padding: 20px; border-radius: 0 0 5px 5px;"></div>
             </div>
         </div>
     </div>
 </div>
-<script src="./js/download.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  

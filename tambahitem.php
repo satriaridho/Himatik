@@ -1,4 +1,6 @@
 <?php
+requireLogin();
+requireAdmin();
 include 'config.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -9,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     try {
         // Connect to the database
-        $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Insert data into the database
@@ -21,6 +23,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(':category', $category);
         $stmt->bindParam(':stock', $stock);
         $stmt->bindParam(':harga_barang', $harga_barang);
+        $stmt->execute();
+
+        // Insert notification
+        $admin_name = getAdminName();
+        $notification_message = "$admin_name added $product_name to products.";
+        $stmt = $pdo->prepare("INSERT INTO notifications (message) VALUES (:message)");
+        $stmt->bindParam(':message', $notification_message);
         $stmt->execute();
 
         echo "<script>alert('Item berhasil ditambahkan!'); window.location.href='index.php?page=stok';</script>";
@@ -58,7 +67,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <a href="index.php?page=stok" class="btn btn-primary" style="background-color: #DCD7C9; color: #76453B;">Kembali</a>
             </form>
         </div>
-
-
     </div>
 </div>

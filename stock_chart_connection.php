@@ -5,15 +5,15 @@ include 'config.php';
 
 try {
     // Connect to the database
-    $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Fetch data from database
     $sql = "
-        SELECT p.category, p.stock, COALESCE(SUM(s.sales), 0) as sales
+        SELECT p.category, SUM(p.stock) AS stock, COALESCE(SUM(s.sales), 0) AS sales
         FROM products p
         LEFT JOIN sales_data s ON p.product_id = s.product_id
-        GROUP BY p.category, p.stock
+        GROUP BY p.category
     ";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
