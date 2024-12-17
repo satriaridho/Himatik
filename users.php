@@ -1,3 +1,25 @@
+<?php
+include 'config.php';
+
+try {
+    // Connect to the database
+    $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Query to fetch product data
+    $stmt = $pdo->prepare("
+        SELECT user_id, username, email, join_date
+        FROM users
+    ");
+    $stmt->execute();
+
+    // Fetch data as an associative array
+    $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
+?>
 <link rel="stylesheet" href="./style/table.css">
 <div class="col-md-9 content" style="margin-left: 400px;" >
   <div class="row">
@@ -20,10 +42,9 @@
             </div>
         </div>
         <table id="dataContainer">
-            <thead style="color: #D5CEC0; ">
-  
-                <tr >
-                    <th>No</th>
+            <thead style="color: #D5CEC0;">
+                <tr>
+                    <th>User ID</th>
                     <th>Username</th>
                     <th>Email</th>
                     <th>Join Date</th>
@@ -31,18 +52,18 @@
                 </tr>
             </thead>
             <tbody>
+                <?php foreach ($users as $user): ?>
                 <tr>
-                    <td>1</td>
-                    <td>Sabun</td>
-                    <td>Elektronik@gmail.com</td>
-                    <td>04/04/2019</td>
-                    <td class="action-buttons" >
-                        <a class="edit-btn" href="index.php?page=edituser" style="text-decoration: none;">EDIT</a>
-                        <a class="delete-btn" href="index.php?page=hapususer" style="text-decoration: none;">DELETE</a>
+                    <td><?php echo htmlspecialchars($user['user_id']); ?></td>
+                    <td><?php echo htmlspecialchars($user['username']); ?></td>
+                    <td><?php echo htmlspecialchars($user['email']); ?></td>
+                    <td><?php echo htmlspecialchars($user['join_date']); ?></td>
+                    <td class="action-buttons">
+                        <a class="edit-btn" href="index.php?page=edituser&user_id=<?php echo $user['user_id']; ?>" style="text-decoration: none;">EDIT</a>
+                        <a class="delete-btn" href="index.php?page=deleteuser&user_id=<?php echo $user['user_id']; ?>" style="text-decoration: none;">DELETE</a>
                     </td>
                 </tr>
-                
-                
+                <?php endforeach; ?>
             </tbody>
         </table>
 <div class="footer d-flex justify-content-center align-items-center" style="color: #DCD7C9;">
