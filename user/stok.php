@@ -41,7 +41,7 @@ try {
                 <i class="fa-solid fa-clipboard-list"></i> Data Barang
             </div>
             <div class="title">
-                    <button class="btn-add" style="margin-bottom: 20px; padding: 7px; border-radius: 5px;"><a style="text-decoration: none; color: #DCD7C9;  " href="index.php?page=notif">Download Data Barang</a></button>
+                    <button class="btn-add" style="margin-bottom: 20px; padding: 7px; border-radius: 5px;"><a style="text-decoration: none; color: #DCD7C9;  " href="export-data.php">Download Data Barang</a></button>
                 </div>
             <div class="hdr">
                 

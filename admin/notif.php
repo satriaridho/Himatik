@@ -32,7 +32,7 @@ try {
                 <div class="section-header mt-3" style="border-radius: 5px 5px 0 0;">
                     Recent
                 </div>
-                <div class="progress-container">
+                <!-- <div class="progress-container">
                     <p style="margin-left: 20px; margin-bottom: -10px; font-weight: bold;">Unduh Data Barang </p>
                     <div class="d-flex align-items-center">
                         <i class="fas fa-file-download fa-2x ms-4"></i>
@@ -49,7 +49,7 @@ try {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 
 
                 <!-- Recent Notification Items -->
