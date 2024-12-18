@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
   <div class="login-cont">
-    <img src="./img/test.jpeg" alt="Logo" width="50">
+    <img src="./assets/img/test.jpeg" alt="Logo" width="50">
     <h1>Inventaris Barang</h1>
     <h2>Log In to Inventory Dashboard</h2>
     <h5>Enter Your Email and Password Below</h5>

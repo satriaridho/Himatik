@@ -63,8 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
   <div class="login-cont">
-    <img src="./img/test.jpeg" alt="Logo" width="50">
-    <h1>Inventaris Barang</h1>
+
     <h2>Register to Inventory Dashboard</h2>
     <h5>Enter Your Email and Password Below</h5>
 
@@ -86,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
       <div class="email">
         <p>ADDRESS</p>
-        <input type="text" name="address" placeholder="Address" required>
+        <input type="text" name="address" placeholder="Address" required style="width: 90%; padding: 10px; border: none; margin: -3px 0; border-radius: 5px;">
       </div>
       <div class="pass">
         <p>PASSWORD</p>
