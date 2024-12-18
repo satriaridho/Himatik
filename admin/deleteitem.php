@@ -26,6 +26,11 @@ try {
         exit;
     }
 
+    // Delete related rows in the sales_data table
+    $stmt = $pdo->prepare("DELETE FROM sales_data WHERE product_id = :product_id");
+    $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
+    $stmt->execute();
+
     // Delete the item from the database
     $stmt = $pdo->prepare("DELETE FROM products WHERE product_id = :product_id");
     $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
