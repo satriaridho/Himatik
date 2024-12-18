@@ -1,6 +1,8 @@
 <?php
 include 'config.php';
 
+$error_message = '';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $login_password = $_POST['password'];
@@ -27,16 +29,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['username'] = $result['username'];
                 $_SESSION['role'] = isset($result['admin_id']) ? 'admin' : 'user';
 
-                header("Location: ./admin/index.php");
+                if ($_SESSION['role'] === 'admin') {
+                    header("Location: ./admin/index.php");
+                } else {
+                    header("Location: ./user/index.php");
+                }
                 exit;
             } else {
-                echo "Login gagal, periksa email dan password!";
+                $error_message = "Login gagal, periksa email dan password!";
             }
         } else {
-            echo "Login gagal, periksa email dan password!";
+            $error_message = "Login gagal, periksa email dan password!";
         }
     } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
+        $error_message = "Error: " . $e->getMessage();
     }
 }
 ?>
@@ -55,22 +61,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
   <div class="login-cont">
     <img src="./img/test.jpeg" alt="Logo" width="50">
-    <h1 >Inventaris Barang</h1>
-    <h2 >Log In to Inventory Dashboard</h2>
+    <h1>Inventaris Barang</h1>
+    <h2>Log In to Inventory Dashboard</h2>
     <h5>Enter Your Email and Password Below</h5>
-
+    <!-- email | password -->
     <!-- admintest@gmail.com | admintest -->
+    <!-- usertest@gmail.com | usertest -->
+
+    <!-- Display error message if login fails -->
+    <?php if (!empty($error_message)): ?>
+      <div class="error-message" style="color: red; text-align: center; margin-bottom: 10px;">
+        <?php echo htmlspecialchars($error_message); ?>
+      </div>
+    <?php endif; ?>
 
     <form method="post" action="login.php">
       <div class="email">
         <p>EMAIL</p>
-        <input type="email" name="email" placeholder="Email address">
+        <input type="email" name="email" placeholder="Email address" required>
       </div>
       <div class="pass">
         <p>PASSWORD</p>
-        <input type="password" name="password" placeholder="Password">
+        <input type="password" name="password" placeholder="Password" required>
       </div>
-      <input type="submit">
+      <input type="submit" value="Login">
     </form>
     <p style="text-align: center;">Don't have an account? <a href="signup.php">Sign Up</a></p>
   </div>

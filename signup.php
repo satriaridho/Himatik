@@ -2,41 +2,50 @@
 include 'config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['username'];
     $email = $_POST['email'];
-    $login_password = $_POST['password'];
+    $password = $_POST['password'];
+    $user_join_date = date("Y-m-d");
+    $user_address = $_POST['address'];
 
-    try {
-        // Connect to the database
-        $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $query = "
-            SELECT user_id, username, email, password, NULL as admin_id FROM users WHERE email = :email
-            UNION
-            SELECT admin_id as user_id, username, email, password, admin_id FROM admin WHERE email = :email
-        ";
-        $stmt = $pdo->prepare($query);
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    // Validate input
+    if (!empty($username) && !empty($email) && !empty($password)) {
+        try {
+            // Connect to the database
+            $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        if ($result) {
-            if (password_verify($login_password, $result['password'])) {
-                session_start();
-                $_SESSION['user_id'] = $result['user_id'];
-                $_SESSION['username'] = $result['username'];
-                $_SESSION['role'] = isset($result['admin_id']) ? 'admin' : 'user';
+            // Check if the email already exists
+            $stmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE email = :email");
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+            $email_exists = $stmt->fetchColumn();
 
-                header("Location: index.php");
+            if (!$email_exists) {
+                // Hash the password
+                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+                // Insert the new user into the database
+                $stmt = $pdo->prepare("INSERT INTO users (username, email, password, join_date, address) VALUES (:username, :email, :password,:join_date, :address)");
+                $stmt->bindParam(':username', $username);
+                $stmt->bindParam(':email', $email);
+                $stmt->bindParam(':password', $hashed_password);
+                $stmt->bindParam(':join_date', $user_join_date);
+                $stmt->bindParam(':address', $user_address);
+                $stmt->execute();
+
+                // Redirect to login page after successful registration
+                header("Location: login.php");
                 exit;
             } else {
-                echo "Login gagal, periksa email dan password!";
+                $error_message = 'Email Sudah Ada!';
             }
-        } else {
-            echo "Login gagal, periksa email dan password!";
+        } catch (PDOException $e) {
+            $error_message = "Error: " . $e->getMessage();
         }
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
+    } else {
+        $error_message = 'All fields are required!';
     }
 }
 ?>
@@ -55,26 +64,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
   <div class="login-cont">
     <img src="./img/test.jpeg" alt="Logo" width="50">
-    <h1 >Inventaris Barang</h1>
-    <h2 >Register to Inventory Dashboard</h2>
+    <h1>Inventaris Barang</h1>
+    <h2>Register to Inventory Dashboard</h2>
     <h5>Enter Your Email and Password Below</h5>
 
-    <!-- admintest@gmail.com | admintest -->
+    <!-- Display error message if registration fails -->
+    <?php if (!empty($error_message)): ?>
+      <div class="error-message" style="color: red; text-align: center; margin-bottom: 10px;">
+        <?php echo htmlspecialchars($error_message); ?>
+      </div>
+    <?php endif; ?>
 
-    <form method="post" action="login.php">
-    <div class="username" style="margin-top: -10px;">
+    <form method="post" action="signup.php">
+      <div class="username" style="margin-top: -10px;">
         <p>USERNAME</p>
-        <input type="text" name="username" placeholder="Username" style="width: 90%; padding: 10px; border: none; margin: -3px 0; border-radius: 5px;">
+        <input type="text" name="username" placeholder="Username" style="width: 90%; padding: 10px; border: none; margin: -3px 0; border-radius: 5px;" required>
       </div>
       <div class="email">
         <p>EMAIL</p>
-        <input type="email" name="email" placeholder="Email address">
+        <input type="email" name="email" placeholder="Email address" required>
+      </div>
+      <div class="email">
+        <p>ADDRESS</p>
+        <input type="text" name="address" placeholder="Address" required>
       </div>
       <div class="pass">
         <p>PASSWORD</p>
-        <input type="password" name="password" placeholder="Password">
+        <input type="password" name="password" placeholder="Password" required>
       </div>
-      <input type="submit">
+      <input type="submit" value="Register">
     </form>
     <p style="text-align: center;">Already have an account? <a href="login.php">Login</a></p>
   </div>
