@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include '../config.php';
 
 // Get current page and rows per page
 $page = isset($_GET['page_num']) ? (int)$_GET['page_num'] : 1; // Default to page 1

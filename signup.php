@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['username'] = $result['username'];
                 $_SESSION['role'] = isset($result['admin_id']) ? 'admin' : 'user';
 
-                header("Location: ./admin/index.php");
+                header("Location: index.php");
                 exit;
             } else {
                 echo "Login gagal, periksa email dan password!";
@@ -50,18 +50,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@700&display=swap" rel="stylesheet">
-  <title>Login Inventaris Barang</title>
+  <title>Register Inventaris Barang</title>
 </head>
 <body>
   <div class="login-cont">
     <img src="./img/test.jpeg" alt="Logo" width="50">
     <h1 >Inventaris Barang</h1>
-    <h2 >Log In to Inventory Dashboard</h2>
+    <h2 >Register to Inventory Dashboard</h2>
     <h5>Enter Your Email and Password Below</h5>
 
     <!-- admintest@gmail.com | admintest -->
 
     <form method="post" action="login.php">
+    <div class="username" style="margin-top: -10px;">
+        <p>USERNAME</p>
+        <input type="text" name="username" placeholder="Username" style="width: 90%; padding: 10px; border: none; margin: -3px 0; border-radius: 5px;">
+      </div>
       <div class="email">
         <p>EMAIL</p>
         <input type="email" name="email" placeholder="Email address">
@@ -72,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
       <input type="submit">
     </form>
-    <p style="text-align: center;">Don't have an account? <a href="signup.php">Sign Up</a></p>
+    <p style="text-align: center;">Already have an account? <a href="login.php">Login</a></p>
   </div>
 </body>
 </html>

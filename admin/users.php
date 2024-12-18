@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include '../config.php';
 
 // Get current page and rows per page
 $page = isset($_GET['page_num']) ? (int)$_GET['page_num'] : 1; // Default to page 1
@@ -34,7 +34,7 @@ try {
 ?>
 
 
-<link rel="stylesheet" href="./style/table.css">
+<link rel="stylesheet" href="../assets/style/table.css">
 <div class="col-md-9 content" style="margin-left: 400px;">
     <div class="row">
         <div class="contr">

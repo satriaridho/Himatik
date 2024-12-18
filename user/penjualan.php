@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include '../config.php';
 
 // Get current page and rows per page
 $page = isset($_GET['page_num']) ? (int)$_GET['page_num'] : 1; // Default to page 1
@@ -31,12 +31,12 @@ try {
 }
 ?>
 
-<link rel="stylesheet" href="./style/table.css">
+<link rel="stylesheet" href="../assets/style/table.css">
 <div class="col-md-9 content" style="margin-left: 400px;">
     <div class="row">
         <div class="contr">
             <div style="color:#DCD7C9; font-size: 40px; margin-bottom: 40px;">
-                <i class="fa-solid fa-clipboard-list"></i> Manajemen Penjualan Barang
+                <i class="fa-solid fa-clipboard-list"></i> Data Penjualan Barang
             </div>
             <div class="title">
                 <button class="btn-add" style="margin-bottom: 20px; padding: 7px; border-radius: 5px;">
@@ -44,12 +44,7 @@ try {
                 </button>
             </div>
             <div class="hdr">
-                <div class="title">
-                    <i class="fas fa-plus-circle" style="color: #DCD7C9;"></i>
-                    <button class="btn-add">
-                        <a style="text-decoration: none; color: #DCD7C9;" href="index.php?page=tambahpenjualan">Tambah Barang Terjual</a>
-                    </button>
-                </div>
+               
                 <div class="search">
                     <div style="position: relative;">
                         <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: -2px; top: 50%; transform: translateY(-50%); color: #76453B;"></i>
@@ -67,7 +62,6 @@ try {
                         <th>Nama Barang</th>
                         <th>Tanggal Penjualan</th>
                         <th>Penjualan</th>
-                        <th>Action Button</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
@@ -84,10 +78,7 @@ try {
                             <td><?php echo htmlspecialchars($product['product_name']); ?></td>
                             <td><?php echo htmlspecialchars($product['sale_date']); ?></td>
                             <td><?php echo htmlspecialchars($product['sales']); ?></td>
-                            <td class="action-buttons">
-                                <a class="edit-btn" href="index.php?page=editpenjualan&sales_id=<?php echo htmlspecialchars($product['sales_id']); ?>" style="text-decoration: none;">EDIT</a>
-                                <a class="delete-btn" href="index.php?page=deletepenjualan&sales_id=<?php echo htmlspecialchars($product['sales_id']); ?>" style="text-decoration: none;">DELETE</a>
-                            </td>
+                            
                         </tr>
                     <?php
                             endif;

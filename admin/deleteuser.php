@@ -1,7 +1,7 @@
 <?php
 requireLogin();
 requireAdmin();
-include 'config.php';
+include '../config.php';
 
 $user_id = isset($_GET['user_id']) ? intval($_GET['user_id']) : null;
 

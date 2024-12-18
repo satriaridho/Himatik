@@ -1,7 +1,7 @@
 <?php
 requireLogin();
 requireAdmin();
-include 'config.php';
+include '../config.php';
 
 $product_id = isset($_GET['product_id']) ? intval($_GET['product_id']) : null;
 
@@ -97,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-<link rel="stylesheet" href="./style/input.css">
+<link rel="stylesheet" href="../assets/style/input.css">
 <div class="col-md-9 content" style="margin-left: 400px;">
     <div class="row">
         <div style="color:#DCD7C9; font-size: 40px; margin-bottom: 40px;">
@@ -111,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
                 <input type="text" name="product_name" id="itemName" required placeholder="Nama Barang" value="<?php echo htmlspecialchars($product['product_name']); ?>">
 
-                <select name="category" id="itemCategory" required>
+                <select name="category" id="itemCategory" required style="width: 100%; padding: 12px; border-radius: 5px;">
                     <option value="">Kategori Barang</option>
                     <option value="Makanan" <?php echo $product['category'] == 'Makanan' ? 'selected' : ''; ?>>Makanan</option>
                     <option value="Minuman" <?php echo $product['category'] == 'Minuman' ? 'selected' : ''; ?>>Minuman</option>

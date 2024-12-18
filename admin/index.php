@@ -1,5 +1,5 @@
 <?php
-include 'session.php';
+include '../session.php';
 requireLogin();
 requireAdmin();
 ?>
@@ -20,7 +20,7 @@ requireAdmin();
 <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
-<link rel="stylesheet" href="./style/dash.css" />
+<link rel="stylesheet" href="../assets/style/dash.css" />
 
 </head>
 <body>
@@ -52,7 +52,7 @@ requireAdmin();
             <i class="fas fa-bell"></i> Notifications
         </a>
         <div> 
-            <a class="nav-link" href="logout.php" onclick="return confirm('Apakah anda yakin ingin logout?')">
+            <a class="nav-link" href="../logout.php" onclick="return confirm('Apakah anda yakin ingin logout?')">
                 <i class="fas fa-sign-out-alt" ></i> Logout
             </a>
         </div>

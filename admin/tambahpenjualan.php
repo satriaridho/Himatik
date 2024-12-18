@@ -1,7 +1,7 @@
 <?php
 requireLogin();
 requireAdmin();
-include 'config.php';
+include '../config.php';
 
 try {
     // Connect to the database
@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-<link rel="stylesheet" href="./style/input.css">
+<link rel="stylesheet" href="../assets/style/input.css">
 <div class="col-md-9 content" style="margin-left: 400px;">
     <div class="row">
         <div style="color:#DCD7C9; font-size: 40px; margin-bottom: 40px;">
@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h3 style="margin-bottom: 50px;">Tambah Penjualan Baru</h3>
             <form id="addSaleForm" method="post" action="">
                 
-                <select id="productId" name="product_id" required>
+                <select id="productId" name="product_id" required style="width: 100%; padding: 12px; border-radius: 5px;">
                     <option value="">Pilih Produk</option>
                     <?php foreach ($products as $product): ?>
                         <option value="<?php echo htmlspecialchars($product['product_id']); ?>">
@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <?php endforeach; ?>
                 </select>
 
-                <input type="date" id="saleDate" name="sale_date" required placeholder="Tanggal Penjualan">
+                <input type="date" id="saleDate" name="sale_date" required placeholder="Tanggal Penjualan" style="width: 100%; padding: 12px; border-radius: 5px;">
 
                 <input type="number" id="sales" name="sales" required placeholder="Jumlah Penjualan">
 

@@ -1,7 +1,7 @@
 <?php
 requireLogin();
 requireAdmin();
-include 'config.php';
+include '../config.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_name = $_POST['username'];
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-<link rel="stylesheet" href="./style/input.css">
+<link rel="stylesheet" href="../assets/style/input.css">
 <div class="col-md-9 content" style="margin-left: 400px;">
     <div class="row">
         <div style="color:#DCD7C9; font-size: 40px; margin-bottom: 40px;">

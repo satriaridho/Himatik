@@ -1,7 +1,7 @@
 <?php
 requireLogin();
 requireAdmin();
-include 'config.php';
+include '../config.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $product_name = $_POST['product_name'];
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-<link rel="stylesheet" href="./style/input.css">
+<link rel="stylesheet" href="../assets/style/input.css">
 <div class="col-md-9 content" style="margin-left: 400px;">
     <div class="row">
         <div style="color:#DCD7C9; font-size: 40px; margin-bottom: 40px;">
@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
                 <input  type="text" id="itemName" name="product_name" required placeholder="Nama Barang">
 
-                <select id="itemCategory" name="category" required>
+                <select id="itemCategory" name="category" required style="width: 100%; padding: 12px; border-radius: 5px;">
                     <option value="Makanan">Makanan</option>
                     <option value="Minuman">Minuman</option>
                     <option value="Alat Tulis">Alat Tulis</option>

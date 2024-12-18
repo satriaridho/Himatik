@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include '../config.php';
 
 try {
     // Connect to the database
@@ -21,7 +21,7 @@ try {
 }
 ?>
 
-<link rel="stylesheet" href="./style/notif.css">
+<link rel="stylesheet" href="../assets/style/notif.css">
 <div class="col-md-9 content" style="margin-left: 400px;">
     <div class="row">
         <div class="container mt-3">
@@ -88,4 +88,4 @@ try {
         </div>
     </div>
 </div>
-<script src="./js/download.js"></script>
+<script src="../assets/js/download.js"></script>

@@ -11,7 +11,7 @@ body{
 }
 
 .login-cont{
-  background: linear-gradient(to bottom, #B19470, #76453B);
+  background: #754540;
   border-radius: 15px;
   padding: 20px;
   width: 320px;
@@ -47,6 +47,7 @@ body{
   text-align: left;
 }
 
+.login-cont input[type="text"],
 .login-cont input[type="email"],
 .login-cont input[type="password"] {
   width: 90%;
@@ -77,11 +78,14 @@ body{
   text-decoration: underline;
 }
 
+.username{
+  margin-bottom: 30px;
+}
 .email{
   margin-bottom: 30px;
 }
 .pass{
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 input::placeholder{
